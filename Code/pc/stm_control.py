@@ -67,74 +67,6 @@ class STM_Status:
         return 1.0 * adc / 32768 * 10.24 / 100e6
 
 
-    def set_bias_scaling_factor(self, factor: float):
-        STM.bias_scaling_factor = factor
-
-    @staticmethod
-    def dac_to_bias_volts(dac: int):
-        """Convert a DAC value to the corresponding bias voltage using the scaling factor.
-
-        Args:
-            dac (int): The DAC value to convert.
-
-        Returns:
-            float: The corresponding bias voltage.
-        """
-        # Base range is 0-3V, multiplied by the scaling factor
-        base_voltage = 3.0
-        return (base_voltage * STM.bias_scaling_factor) * dac / 65535.0
-
-    def set_x_scaling_factor(self, factor: float):
-        STM.x_scaling_factor = factor
-
-    @staticmethod
-    def dac_to_dacx_volts(dac: int):
-        """Convert a DAC value to the corresponding X-axis voltage using the scaling factor.
-
-        Args:
-            dac (int): The DAC value to convert.
-
-        Returns:
-            float: The corresponding X-axis voltage.
-        """
-        # Base range is 0-5V, multiplied by the scaling factor
-        base_voltage = 5.0
-        return (base_voltage * STM.x_scaling_factor) * (dac - 32768) / 32768
-
-    def set_y_scaling_factor(self, factor: float):
-        STM.y_scaling_factor = factor
-
-    @staticmethod
-    def dac_to_dacy_volts(dac: int):
-        """Convert a DAC value to the corresponding Y-axis voltage using the scaling factor.
-
-        Args:
-            dac (int): The DAC value to convert.
-
-        Returns:
-            float: The corresponding Y-axis voltage.
-        """
-        # Base range is 0-5V, multiplied by the scaling factor
-        base_voltage = 5.0
-        return (base_voltage * STM.y_scaling_factor) * (dac - 32768) / 32768
-
-    def set_z_scaling_factor(self, factor: float):
-        STM.z_scaling_factor = factor
-
-    @staticmethod
-    def dac_to_dacz_volts(dac: int):
-        """Convert a DAC value to the corresponding Z-axis voltage using the scaling factor.
-
-        Args:
-            dac (int): The DAC value to convert.
-
-        Returns:
-            float: The corresponding Z-axis voltage.
-        """
-        # Base range is 0-10V, multiplied by the scaling factor
-        base_voltage = 10.0
-        return (base_voltage * STM.z_scaling_factor) * (dac - 32768) / 32768
-
     def to_string(self):
         """Return a formatted string representation of the STM status.
 
@@ -432,3 +364,71 @@ class STM(object):
                 break
         self.busy = False
         return
+
+    def set_bias_scaling_factor(self, factor: float):
+        STM.bias_scaling_factor = factor
+
+    @staticmethod
+    def dac_to_bias_volts(dac: int):
+        """Convert a DAC value to the corresponding bias voltage using the scaling factor.
+
+        Args:
+            dac (int): The DAC value to convert.
+
+        Returns:
+            float: The corresponding bias voltage.
+        """
+        # Base range is 0-3V, multiplied by the scaling factor
+        base_voltage = 3.0
+        return (base_voltage * STM.bias_scaling_factor) * dac / 65535.0
+
+    def set_x_scaling_factor(self, factor: float):
+        STM.x_scaling_factor = factor
+
+    @staticmethod
+    def dac_to_dacx_volts(dac: int):
+        """Convert a DAC value to the corresponding X-axis voltage using the scaling factor.
+
+        Args:
+            dac (int): The DAC value to convert.
+
+        Returns:
+            float: The corresponding X-axis voltage.
+        """
+        # Base range is 0-5V, multiplied by the scaling factor
+        base_voltage = 5.0
+        return (base_voltage * STM.x_scaling_factor) * (dac - 32768) / 32768
+
+    def set_y_scaling_factor(self, factor: float):
+        STM.y_scaling_factor = factor
+
+    @staticmethod
+    def dac_to_dacy_volts(dac: int):
+        """Convert a DAC value to the corresponding Y-axis voltage using the scaling factor.
+
+        Args:
+            dac (int): The DAC value to convert.
+
+        Returns:
+            float: The corresponding Y-axis voltage.
+        """
+        # Base range is 0-5V, multiplied by the scaling factor
+        base_voltage = 5.0
+        return (base_voltage * STM.y_scaling_factor) * (dac - 32768) / 32768
+
+    def set_z_scaling_factor(self, factor: float):
+        STM.z_scaling_factor = factor
+
+    @staticmethod
+    def dac_to_dacz_volts(dac: int):
+        """Convert a DAC value to the corresponding Z-axis voltage using the scaling factor.
+
+        Args:
+            dac (int): The DAC value to convert.
+
+        Returns:
+            float: The corresponding Z-axis voltage.
+        """
+        # Base range is 0-10V, multiplied by the scaling factor
+        base_voltage = 10.0
+        return (base_voltage * STM.z_scaling_factor) * (dac - 32768) / 32768
